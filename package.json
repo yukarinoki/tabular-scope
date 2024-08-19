@@ -61,6 +61,20 @@
                 "title": "TabularScope: View PKL"
             }
         ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "when": "resourceExtname == .csv",
+                    "command": "tabular-scope.viewCSV",
+                    "group": "navigation"
+                },
+                {
+                    "when": "resourceExtname == .pkl",
+                    "command": "tabular-scope.viewPKL",
+                    "group": "navigation"
+                }
+            ]
+        },
         "configuration": {
             "title": "TabularScope",
             "properties": {

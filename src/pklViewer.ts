@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as child_process from 'child_process';
+import { getWebviewContent } from './webviewHelper';
 
 export class PKLViewer {
     private getPythonPath(): string {
@@ -8,43 +9,55 @@ export class PKLViewer {
         return config.get('pythonPath') || 'python';
     }
 
-    public async showPKL() {
+    public async showPKL(fileUri?: vscode.Uri) {
+        console.log('showPKL called with fileUri:', fileUri);
+
         let filePath: string | undefined;
 
-        // アクティブなエディタがある場合はそのファイルパスを使用
-        const editor = vscode.window.activeTextEditor;
-        if (editor && editor.document.languageId === 'pkl') {
-            filePath = editor.document.uri.fsPath;
+        if (fileUri) {
+            filePath = fileUri.fsPath;
+            console.log('File path from fileUri:', filePath);
         } else {
-            // アクティブなエディタがない場合はファイル選択ダイアログを表示
-            const fileUri = await vscode.window.showOpenDialog({
-                canSelectFiles: true,
-                canSelectFolders: false,
-                canSelectMany: false,
-                filters: {
-                    'Pickle Files': ['pkl']
+            const editor = vscode.window.activeTextEditor;
+            if (editor && editor.document.languageId === 'pkl') {
+                filePath = editor.document.uri.fsPath;
+                console.log('File path from active editor:', filePath);
+            } else {
+                console.log('No active PKL editor, showing file dialog');
+                const selectedFile = await vscode.window.showOpenDialog({
+                    canSelectFiles: true,
+                    canSelectFolders: false,
+                    canSelectMany: false,
+                    filters: {
+                        'PKL Files': ['pkl']
+                    }
+                });
+                if (selectedFile && selectedFile[0]) {
+                    filePath = selectedFile[0].fsPath;
+                    console.log('File path from dialog:', filePath);
                 }
-            });
-
-            if (fileUri && fileUri[0]) {
-                filePath = fileUri[0].fsPath;
             }
         }
 
         if (!filePath) {
+            console.log('No file path selected');
             vscode.window.showErrorMessage('No PKL file selected');
             return;
         }
 
+        console.log('Attempting to read PKL file:', filePath);
+
         try {
             const data = await this.readPKLFile(filePath);
+            console.log('PKL file read successfully');
             this.showDataInWebview(data, filePath);
         } catch (error) {
+            console.error('Failed to read PKL file:', error);
             vscode.window.showErrorMessage('Failed to read PKL file: ' + error);
         }
     }
 
-    private readPKLFile(filePath: string): Promise<string> {
+    private async readPKLFile(filePath: string): Promise<string> {
         return new Promise((resolve, reject) => {
             const pythonScript = `
 import pandas as pd
@@ -59,6 +72,8 @@ print(df.to_json(orient='split'))
             fs.writeFileSync(tempScriptPath, pythonScript);
 
             const pythonPath = this.getPythonPath();
+            console.log('Using Python path:', pythonPath);
+
             const process = child_process.spawn(pythonPath, [tempScriptPath, filePath]);
             let output = '';
             let error = '';
@@ -72,9 +87,11 @@ print(df.to_json(orient='split'))
             });
 
             process.on('close', (code) => {
+                console.log('Python process closed with code:', code);
                 if (code === 0) {
                     resolve(output);
                 } else {
+                    console.error('Python script error:', error);
                     reject(new Error(error));
                 }
                 fs.unlinkSync(tempScriptPath);
@@ -83,6 +100,8 @@ print(df.to_json(orient='split'))
     }
 
     private showDataInWebview(jsonData: string, filePath: string) {
+        console.log('Showing data in webview for file:', filePath);
+
         const panel = vscode.window.createWebviewPanel(
             'pklViewer',
             `PKL Viewer: ${filePath.split('/').pop()}`,
@@ -94,34 +113,6 @@ print(df.to_json(orient='split'))
         const columns = data.columns;
         const rows = data.data;
 
-        panel.webview.html = this.getWebviewContent(columns, rows);
-    }
-
-    private getWebviewContent(columns: string[], rows: any[][]): string {
-        return `
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>PKL Viewer</title>
-                <style>
-                    table { border-collapse: collapse; width: 100%; }
-                    th, td { border: 1px solid #ddd; padding: 8px; }
-                    tr:nth-child(even) { background-color: #f2f2f2; }
-                </style>
-            </head>
-            <body>
-                <table>
-                    <thead>
-                        <tr>${columns.map(c => `<th>${c}</th>`).join('')}</tr>
-                    </thead>
-                    <tbody>
-                        ${rows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('')}
-                    </tbody>
-                </table>
-            </body>
-            </html>
-        `;
+        panel.webview.html = getWebviewContent(columns, rows);
     }
 }
