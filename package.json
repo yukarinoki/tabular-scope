@@ -3,6 +3,7 @@
     "displayName": "TabularScope",
     "description": "View CSV and PKL files in VSCode",
     "version": "0.0.2",
+    "publisher": "yukarinoki",
     "engines": {
         "vscode": "^1.60.0"
     },

@@ -15,7 +15,7 @@ TabularScope is a Visual Studio Code extension that enhances CSV and PKL (Pickle
 3. Search for "TabularScope"
 4. Click Install
 
-Alternatively, you can download the VSIX file from the [releases page](https://github.com/yourusername/tabular-scope/releases) and install it manually.
+Alternatively, you can download the VSIX file from the [releases page](https://github.com/yukarinoki/tabular-scope/releases) and install it manually.
 
 ## Usage
 
@@ -54,7 +54,7 @@ For Anaconda environments, you might use something like:
 
 Or on Windows:
 ```
-C:\Users\YourUsername\Anaconda3\envs\your_env_name\python.exe
+C:\Users\yukarinoki\Anaconda3\envs\your_env_name\python.exe
 ```
 
 ## Requirements
@@ -79,15 +79,15 @@ Initial release of TabularScope
 
 ## Contributing
 
-Contributions are always welcome! Please read the [contribution guidelines](CONTRIBUTING.md) first.
+Contributions are always welcome!
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
 ## Support
 
-If you encounter any problems or have any suggestions, please file an issue on the [GitHub repository](https://github.com/yourusername/tabular-scope/issues).
+If you encounter any problems or have any suggestions, please file an issue on the [GitHub repository](https://github.com/yukarinoki/tabular-scope/issues).
 
 ---
 
