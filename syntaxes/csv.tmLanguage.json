@@ -1,0 +1,20 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "CSV",
+    "patterns": [
+        {
+            "match": "(\",\")",
+            "name": "punctuation.separator.csv"
+        },
+        {
+            "match": "^([^,\n]+)",
+            "name": "entity.name.tag.csv"
+        },
+        {
+            "begin": "\"",
+            "end": "\"",
+            "name": "string.quoted.double.csv"
+        }
+    ],
+    "scopeName": "source.csv"
+}

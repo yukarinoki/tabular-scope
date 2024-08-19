@@ -1,0 +1,61 @@
+{
+    "name": "tabular-scope",
+    "displayName": "TabularScope",
+    "description": "View CSV files in VSCode",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.60.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:tabular-scope.viewCSV"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "languages": [
+            {
+                "id": "csv",
+                "aliases": [
+                    "CSV",
+                    "csv"
+                ],
+                "extensions": [
+                    ".csv"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "csv",
+                "scopeName": "source.csv",
+                "path": "./syntaxes/csv.tmLanguage.json"
+            }
+        ],
+        "commands": [
+            {
+                "command": "tabular-scope.viewCSV",
+                "title": "TabularScope: View CSV"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./"
+    },
+    "devDependencies": {
+        "@types/csv-parse": "^1.2.2",
+        "@types/node": "^14.18.63",
+        "@types/vscode": "^1.92.0",
+        "typescript": "^4.9.5"
+    },
+    "dependencies": {
+        "csv-parse": "^4.16.3"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}
