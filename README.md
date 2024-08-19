@@ -23,6 +23,30 @@ TabularScope is a Visual Studio Code extension that enhances CSV file viewing an
    - Open the command palette (Ctrl+Shift+P)
    - Type "TabularScope: View CSV" and select the command
 
+## Configuration
+
+TabularScope can be customized with the following settings:
+
+* `tabularScope.pythonPath`: Specify the path to the Python executable. This is useful when using Anaconda environments or custom Python installations.
+
+To set this:
+
+1. Open VS Code settings (File > Preferences > Settings)
+2. Search for "TabularScope"
+3. In the "Python Path" field, enter the path to your Python executable.
+
+For Anaconda environments, you might use something like:
+```
+/home/username/anaconda3/envs/your_env_name/bin/python
+```
+
+Or on Windows:
+```
+C:\Users\YourUsername\Anaconda3\envs\your_env_name\python.exe
+```
+
+... (その他の内容) ...
+
 ## Contributing
 
 Contributions are always welcome! 

@@ -1,0 +1,31 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "PKL",
+    "patterns": [
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "#comments"
+        }
+    ],
+    "repository": {
+        "strings": {
+            "name": "string.quoted.double.pkl",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "name": "constant.character.escape.pkl",
+                    "match": "\\\\."
+                }
+            ]
+        },
+        "comments": {
+            "name": "comment.line.number-sign.pkl",
+            "begin": "#",
+            "end": "$"
+        }
+    },
+    "scopeName": "source.pkl"
+}

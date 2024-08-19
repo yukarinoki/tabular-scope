@@ -1,8 +1,8 @@
 {
     "name": "tabular-scope",
     "displayName": "TabularScope",
-    "description": "View CSV files in VSCode",
-    "version": "0.0.1",
+    "description": "View CSV and PKL files in VSCode",
+    "version": "0.0.2",
     "engines": {
         "vscode": "^1.60.0"
     },
@@ -10,7 +10,10 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:tabular-scope.viewCSV"
+        "onCommand:tabular-scope.viewCSV",
+        "onCommand:tabular-scope.viewPKL",
+        "onLanguage:csv",
+        "onLanguage:pkl"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -23,8 +26,17 @@
                 ],
                 "extensions": [
                     ".csv"
+                ]
+            },
+            {
+                "id": "pkl",
+                "aliases": [
+                    "PKL",
+                    "pkl"
                 ],
-                "configuration": "./language-configuration.json"
+                "extensions": [
+                    ".pkl"
+                ]
             }
         ],
         "grammars": [
@@ -32,14 +44,33 @@
                 "language": "csv",
                 "scopeName": "source.csv",
                 "path": "./syntaxes/csv.tmLanguage.json"
+            },
+            {
+                "language": "pkl",
+                "scopeName": "source.pkl",
+                "path": "./syntaxes/pkl.tmLanguage.json"
             }
         ],
         "commands": [
             {
                 "command": "tabular-scope.viewCSV",
                 "title": "TabularScope: View CSV"
+            },
+            {
+                "command": "tabular-scope.viewPKL",
+                "title": "TabularScope: View PKL"
             }
-        ]
+        ],
+        "configuration": {
+            "title": "TabularScope",
+            "properties": {
+                "tabularScope.pythonPath": {
+                    "type": "string",
+                    "default": "python",
+                    "description": "Path to Python executable. Use 'python' for system default, or specify a full path for Anaconda environments."
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
@@ -47,15 +78,11 @@
         "watch": "tsc -watch -p ./"
     },
     "devDependencies": {
-        "@types/csv-parse": "^1.2.2",
-        "@types/node": "^14.18.63",
-        "@types/vscode": "^1.92.0",
-        "typescript": "^4.9.5"
+        "@types/node": "^14.14.37",
+        "@types/vscode": "^1.60.0",
+        "typescript": "^4.3.5"
     },
     "dependencies": {
         "csv-parse": "^4.16.3"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC"
+    }
 }
