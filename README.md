@@ -1,27 +1,39 @@
 # TabularScope
 
-TabularScope is a Visual Studio Code extension that enhances CSV file viewing and editing capabilities. It provides a user-friendly interface for working with CSV files directly within VS Code.
+TabularScope is a Visual Studio Code extension that enhances CSV and PKL (Pickle) file viewing capabilities. It provides a user-friendly interface for working with tabular data directly within VS Code.
 
 ## Features
 
-- **CSV Language Support**: Automatically recognizes and highlights CSV files.
-- **CSV Viewer**: Displays CSV files in a formatted, easy-to-read table view.
-- **Data Analysis**: (Coming soon) Provides basic statistical analysis of CSV data.
+- **CSV and PKL Support**: Automatically recognizes and provides viewing capabilities for CSV and PKL files.
+- **Quick View**: Right-click on CSV or PKL files in the file explorer to open them in a formatted table view.
+- **Custom Python Environment**: Ability to specify a custom Python path for PKL file processing.
 
-## (Not Yet) Installation
+## Installation
 
 1. Open Visual Studio Code
 2. Go to the Extensions view (Ctrl+Shift+X)
 3. Search for "TabularScope"
 4. Click Install
 
+Alternatively, you can download the VSIX file from the [releases page](https://github.com/yourusername/tabular-scope/releases) and install it manually.
+
 ## Usage
 
-1. Open a CSV file in VS Code.
-2. The file should automatically be recognized as CSV. If not, you can manually set the language mode to CSV by clicking on the language selector in the bottom-right corner of VS Code and selecting "CSV".
-3. To view the CSV in table format:
-   - Open the command palette (Ctrl+Shift+P)
-   - Type "TabularScope: View CSV" and select the command
+### Viewing CSV Files
+
+1. Open a CSV file in VS Code or right-click on a CSV file in the file explorer.
+2. Either:
+   - Use the command palette (Ctrl+Shift+P) and type "TabularScope: View CSV"
+   - Or, select "Open with TabularScope" from the context menu.
+3. The CSV content will be displayed in a formatted table view.
+
+### Viewing PKL Files
+
+1. Open a PKL file in VS Code or right-click on a PKL file in the file explorer.
+2. Either:
+   - Use the command palette (Ctrl+Shift+P) and type "TabularScope: View PKL"
+   - Or, select "Open with TabularScope" from the context menu.
+3. The PKL content will be displayed in a formatted table view.
 
 ## Configuration
 
@@ -45,20 +57,38 @@ Or on Windows:
 C:\Users\YourUsername\Anaconda3\envs\your_env_name\python.exe
 ```
 
-... (その他の内容) ...
+## Requirements
+
+- Visual Studio Code version 1.60.0 or higher
+- Python with pandas library installed (for PKL file viewing)
+
+## Known Issues
+
+- Large CSV or PKL files (>100MB) may cause performance issues.
+- PKL viewing requires a working Python environment with pandas installed.
+
+## Release Notes
+
+### 1.0.0
+
+Initial release of TabularScope
+
+- Basic CSV and PKL file viewing support
+- Context menu integration for quick file opening
+- Custom Python path configuration
 
 ## Contributing
 
-Contributions are always welcome! 
+Contributions are always welcome! Please read the [contribution guidelines](CONTRIBUTING.md) first.
 
 ## License
 
-This project is licensed under the MIT License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Support
 
-If you encounter any problems or have any suggestions, please file an issue on the [GitHub repository](https://github.com/yukarinoki/tabular-scope/issues).
+If you encounter any problems or have any suggestions, please file an issue on the [GitHub repository](https://github.com/yourusername/tabular-scope/issues).
 
 ---
 
-Happy CSV viewing with TabularScope! 📊🔍
+Enjoy viewing your tabular data with TabularScope! 📊🔍
