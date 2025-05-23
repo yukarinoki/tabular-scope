@@ -2,7 +2,7 @@
     "name": "tabular-scope",
     "displayName": "TabularScope",
     "description": "View CSV and PKL files in VSCode",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "publisher": "yukarinoki",
     "engines": {
         "vscode": "^1.60.0"
@@ -82,7 +82,12 @@
                 "tabularScope.pythonPath": {
                     "type": "string",
                     "default": "python",
-                    "description": "Path to Python executable. Use 'python' for system default, or specify a full path for Anaconda environments."
+                    "description": "Path to Python executable. Use 'python' for system default, or specify a full path for Anaconda environments. Examples: '/home/user/anaconda3/envs/myenv/bin/python' or 'C:\\Users\\user\\Anaconda3\\envs\\myenv\\python.exe'"
+                },
+                "tabularScope.enableDebugLogging": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable debug logging for PKL file reading operations"
                 }
             }
         }

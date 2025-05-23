@@ -1,0 +1,12 @@
+# TabularScope PKL Viewer Requirements
+# Install with: pip install -r requirements.txt
+
+pandas>=1.3.0
+numpy>=1.21.0
+
+# Optional: For better compatibility with different pickle formats
+joblib>=1.0.0
+
+# Note: These are the minimum recommended versions
+# For best compatibility, use the latest stable versions:
+# pip install --upgrade pandas numpy joblib
