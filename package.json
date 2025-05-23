@@ -4,6 +4,7 @@
     "description": "View CSV and PKL files in VSCode",
     "version": "0.0.3",
     "publisher": "yukarinoki",
+    "icon": "image/tabular_scope_icon.png",
     "engines": {
         "vscode": "^1.60.0"
     },
